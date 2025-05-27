@@ -4,6 +4,7 @@ import axios from 'axios';
 import Card from './Component/Card';
 import Pagination from './Component/Pagination';
 import './Style/card.css';
+
 function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -17,7 +18,9 @@ function App() {
     }
     else{
       const apiUrl = process.env.REACT_APP_API_URL;
-    axios.get(apiUrl)
+      console.log(apiUrl)
+    //axios.get(apiUrl)
+    axios.get("https://dummyjson.com/products?limit=500")
       .then((res) => {
         setData(res.data.products);
         setLoading(false);
@@ -52,8 +55,7 @@ function App() {
   }
 
   return (
-    <>
-
+    <>  
       <h1>All Products</h1>
       <div className="card">
         {data.slice(start, end).map((item) => (
