@@ -1,0 +1,24 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.page{
+margin:2px;
+padding:2px;
+border:1px solid black;}
+.pages{
+padding: 5px;
+cursor: pointer;
+}
+.main{
+    font-size: 22px;
+    background-color: rgb(251, 251, 255);
+    color: #000;
+}
+.but{
+    display: flex;
+    justify-content: end;
+   font-weight: bold;
+   cursor: pointer;
+}
