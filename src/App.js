@@ -3,23 +3,36 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Component/Card';
 import Pagination from './Component/Pagination';
-import './Style/card.css'
+import './Style/card.css';
 function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   useEffect(() => {
-    axios.get("https://dummyjson.com/products?limit=500")
+    const localData = localStorage.getItem('products');
+    if(localData){
+      setData(JSON.parse(localData));
+      setLoading(false);
+    }
+    else{
+      const apiUrl = process.env.REACT_APP_API_URL;
+    axios.get(apiUrl)
       .then((res) => {
         setData(res.data.products);
         setLoading(false);
+        console.log("api called");
+        localStorage.setItem('products',JSON.stringify(res.data.products));
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
-      });
+      });}
+
   }, []);
+
+  
+
   if (loading) return <div>Loading....</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -42,7 +55,7 @@ function App() {
     <>
 
       <h1>All Products</h1>
-      <div class="card">
+      <div className="card">
         {data.slice(start, end).map((item) => (
           <Card key={item.id}
             image={item.images[0]}

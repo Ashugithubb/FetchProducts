@@ -12,10 +12,14 @@ padding: 5px;
 cursor: pointer;
 }
 .main{
-    font-size: 22px;
+    font-size: 25px;
+    font-weight: bold;
     background-color: rgb(251, 251, 255);
     color: #000;
+    border:1px solid black;
+    border-radius: 3px;
 }
+
 .but{
     display: flex;
     justify-content: end;
